@@ -1,5 +1,3 @@
-import React from 'react'
-
 import Products from '@/lib/components/deposito/products'
 
 const deposito = () => {
