@@ -3,9 +3,12 @@
  * @see https://v0.dev/t/Gmob31VdEYg
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from 'next/headers'
 import Link from 'next/link'
+
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import {
     DropdownMenuTrigger,
     DropdownMenuLabel,
@@ -14,6 +17,7 @@ import {
     DropdownMenuContent,
     DropdownMenu,
 } from '@/components/ui/dropdown-menu'
+import { Input } from '@/components/ui/input'
 import {
     TableHead,
     TableRow,
@@ -32,10 +36,6 @@ import {
     ShoppingCartIcon,
 } from '@/lib/components/icons/icons'
 
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
 export default async function Component() {
     // const supabase = createClientComponentClient()
     const cookieStore = cookies()

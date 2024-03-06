@@ -1,11 +1,7 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/qtaObo6xre8
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
 import Link from 'next/link'
-import { Input } from '@/components/ui/input'
+
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import { MountainIcon } from '@/lib/components/icons/icons'
 
 export default function Component() {

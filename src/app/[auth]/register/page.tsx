@@ -1,13 +1,15 @@
-import Link from 'next/link'
-import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
-import { headers } from 'next/headers'
-import { createClient } from '@/lib/supabase/client'
 import { redirect } from 'next/navigation'
+
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { createClient } from '@/lib/supabase/client'
+
 import { SubmitButton } from './submit-button'
+
 const Register = () => {
     const signUp = async (formData: FormData) => {
         'use server'
+
         // const origin = headers().get('origin')
         const email = formData.get('email') as string
         const password = formData.get('password') as string
@@ -22,7 +24,7 @@ const Register = () => {
             console.log(error)
         }
         // console.log(data)
-        //return redirect to auth/login
+        // return redirect to auth/login
         return redirect('/auth/login')
     }
     return (

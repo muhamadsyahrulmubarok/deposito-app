@@ -1,10 +1,12 @@
 'use client'
+
 /**
  * v0 by Vercel.
  * @see https://v0.dev/t/9Amait2Wn2R
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
 import Link from 'next/link'
+
 import {
     NavigationMenuLink,
     NavigationMenuList,
