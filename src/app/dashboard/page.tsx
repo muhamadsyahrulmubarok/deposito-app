@@ -1,9 +1,8 @@
 /**
  * v0 by Vercel.
  * @see https://v0.dev/t/Gmob31VdEYg
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
+ * Documentation: https://v0.dev/docs/integrating-generated-code-into-your-nextjs-app
  */
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import Link from 'next/link'
@@ -42,8 +41,6 @@ export default async function Component() {
     const supabase = createServerComponentClient({
         cookies: () => cookieStore,
     })
-    const { data } = await supabase.from('todos').select()
-    console.log(data)
     return (
         <div className="flex min-h-screen w-full">
             <div className="hidden border-r bg-gray-100/40 lg:block dark:bg-gray-800/40">
@@ -51,7 +48,7 @@ export default async function Component() {
                     <div className="flex h-14 items-center border-b px-6">
                         <Link
                             className="flex items-center gap-2 font-semibold"
-                            href="#"
+                            href="/dashboard"
                         >
                             <Package2Icon className="h-6 w-6" />
                             <span className="">Acme Inc</span>
@@ -60,28 +57,28 @@ export default async function Component() {
                     <nav className="grid items-start px-4 text-sm font-medium">
                         <Link
                             className="flex items-center gap-3 rounded-lg bg-gray-100 px-3 py-2 text-gray-900  transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50"
-                            href="#"
+                            href="/"
                         >
                             <HomeIcon className="h-4 w-4" />
                             Home
                         </Link>
                         <Link
                             className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-                            href="#"
+                            href="/"
                         >
                             <PackageIcon className="h-4 w-4" />
                             Products
                         </Link>
                         <Link
                             className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-                            href="#"
+                            href="/"
                         >
                             <LayoutGridIcon className="h-4 w-4" />
                             Categories
                         </Link>
                         <Link
                             className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-                            href="#"
+                            href="/"
                         >
                             <ShoppingCartIcon className="h-4 w-4" />
                             Orders
@@ -177,7 +174,7 @@ export default async function Component() {
                                 <TableRow>
                                     <TableCell>
                                         <img
-                                            alt="Product image"
+                                            alt="Product"
                                             className="aspect-square rounded-md object-cover"
                                             height="64"
                                             src="https://placehold.co/100"
@@ -196,7 +193,7 @@ export default async function Component() {
                                 <TableRow>
                                     <TableCell>
                                         <img
-                                            alt="Product image"
+                                            alt="Product"
                                             className="aspect-square rounded-md object-cover"
                                             height="64"
                                             src="https://placehold.co/100"
@@ -215,7 +212,7 @@ export default async function Component() {
                                 <TableRow>
                                     <TableCell>
                                         <img
-                                            alt="Product image"
+                                            alt="Product "
                                             className="aspect-square rounded-md object-cover"
                                             height="64"
                                             src="https://placehold.co/100"
@@ -234,7 +231,7 @@ export default async function Component() {
                                 <TableRow>
                                     <TableCell>
                                         <img
-                                            alt="Product image"
+                                            alt="Product"
                                             className="aspect-square rounded-md object-cover"
                                             height="64"
                                             src="https://placehold.co/100"
@@ -253,7 +250,7 @@ export default async function Component() {
                                 <TableRow>
                                     <TableCell>
                                         <img
-                                            alt="Product image"
+                                            alt="Product"
                                             className="aspect-square rounded-md object-cover"
                                             height="64"
                                             src="https://placehold.co/100"

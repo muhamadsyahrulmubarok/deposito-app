@@ -8,32 +8,32 @@ export default function Component() {
     return (
         <div className="flex flex-col min-h-[100dvh] bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
             <header className="px-4 lg:px-6 h-14 flex items-center">
-                <Link className="flex items-center justify-center" href="#">
+                <Link className="flex items-center justify-center" href="/">
                     <MountainIcon className="h-6 w-6" />
                     <span className="sr-only">Acme Inc</span>
                 </Link>
                 <nav className="ml-auto flex gap-4 sm:gap-6">
                     <Link
                         className="text-sm font-medium hover:underline underline-offset-4"
-                        href="#"
+                        href="/"
                     >
                         Features
                     </Link>
                     <Link
                         className="text-sm font-medium hover:underline underline-offset-4"
-                        href="#"
+                        href="/"
                     >
                         Pricing
                     </Link>
                     <Link
                         className="text-sm font-medium hover:underline underline-offset-4"
-                        href="#"
+                        href="/"
                     >
                         About
                     </Link>
                     <Link
                         className="text-sm font-medium hover:underline underline-offset-4"
-                        href="#"
+                        href="/"
                     >
                         Contact
                     </Link>
@@ -178,7 +178,7 @@ export default function Component() {
                                 Sign up to get notified when we launch.
                                 <Link
                                     className="underline underline-offset-2"
-                                    href="#"
+                                    href="/"
                                 >
                                     Terms & Conditions
                                 </Link>
@@ -199,7 +199,7 @@ export default function Component() {
                                 </h2>
                                 <Link
                                     className="inline-flex h-9 items-center justify-center rounded-md bg-gray-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-950"
-                                    href="#"
+                                    href="/"
                                 >
                                     Get Started
                                 </Link>
@@ -224,13 +224,13 @@ export default function Component() {
                 <nav className="sm:ml-auto flex gap-4 sm:gap-6">
                     <Link
                         className="text-xs hover:underline underline-offset-4"
-                        href="#"
+                        href="/"
                     >
                         Terms of Service
                     </Link>
                     <Link
                         className="text-xs hover:underline underline-offset-4"
-                        href="#"
+                        href="/"
                     >
                         Privacy
                     </Link>

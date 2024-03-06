@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
@@ -24,10 +23,10 @@ const Login = () => {
             password,
         })
         if (error) {
-            console.error('Error logging in:', error)
+            // console.error('Error logging in:', error)
         } else {
             // console.log('User:', user)
-            console.log('data:', data)
+            // console.log('data:', data)
             router.push('/dashboard')
         }
         setLoading(false)

@@ -1,11 +1,13 @@
 {
     "rules": {
-        "prettier/prettier": [
-            "error",
-            {
-                "endOfLine": "auto"
-            }
-        ],
+        "react/no-unescaped-entities": "off",
+        "@next/next/no-page-custom-font": "off",
+        // "prettier/prettier": [
+        //     "error",
+        //     {
+        //         "endOfLine": "auto"
+        //     }
+        // ],
         "react/react-in-jsx-scope": "off",
         "react/jsx-props-no-spreading": "off",
         "react/prop-types": "off",
@@ -17,5 +19,6 @@
             }
         ]
     },
-    "extends": ["sznm/react", "plugin:@next/next/recommended"]
+    // "extends": ["sznm/react", "plugin:@next/next/recommended"]
+    "extends": "next"
 }
