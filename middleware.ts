@@ -1,7 +1,16 @@
-import { type NextRequest } from 'next/server'
-import { updateSession } from '@/lib/supabase/middleware'
+import { type NextRequest, NextResponse } from 'next/server'
+import { updateSession } from '@/lib/supabase/updateSession'
+import { getSession } from '@/lib/supabase/updateSession'
 
 export async function middleware(request: NextRequest) {
+    const session = await getSession(request)
+    if (request.nextUrl.pathname.startsWith('/dashboard') && !session) {
+        // If the user is not logged in and tries to access /dashboard, redirect them to /auth/login
+        return NextResponse.redirect('/auth/login')
+    } else if (request.nextUrl.pathname.startsWith('/auth/login') && session) {
+        // If the user is logged in and tries to access /auth/login, redirect them to /dashboard
+        return NextResponse.redirect('/dashboard')
+    }
     return await updateSession(request)
 }
 

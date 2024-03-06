@@ -25,7 +25,7 @@ const Login = () => {
         } else {
             // console.log('User:', user)
             console.log('data:', data)
-            // router.push('/dashboard')
+            router.push('/dashboard')
         }
         setLoading(false)
     }

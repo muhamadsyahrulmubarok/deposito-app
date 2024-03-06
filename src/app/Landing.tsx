@@ -73,7 +73,7 @@ export default function Component() {
                                     alt="Hero"
                                     className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center"
                                     height="310"
-                                    src="/placeholder.svg"
+                                    src="https://placehold.co/600x400/EEE/31343C"
                                     width="550"
                                 />
                             </div>
@@ -104,7 +104,7 @@ export default function Component() {
                                 alt="Image"
                                 className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full"
                                 height="310"
-                                src="/placeholder.svg"
+                                src="https://placehold.co/600x400/EEE/31343C"
                                 width="550"
                             />
                             <div className="grid gap-4">
@@ -213,7 +213,7 @@ export default function Component() {
                                     alt="Image"
                                     className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center"
                                     height="310"
-                                    src="/placeholder.svg"
+                                    src="https://placehold.co/600x400/EEE/31343C"
                                     width="550"
                                 />
                             </div>

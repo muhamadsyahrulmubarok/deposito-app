@@ -1,5 +1,11 @@
+/**
+ * v0 by Vercel.
+ * @see https://v0.dev/t/Gmob31VdEYg
+ * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
+ */
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import {
     DropdownMenuTrigger,
     DropdownMenuLabel,
@@ -16,28 +22,100 @@ import {
     TableBody,
     Table,
 } from '@/components/ui/table'
-import { Package2Icon, MoreHorizontalIcon } from '@/lib/components/icons/icons'
-import Sidebar from '@/lib/components/dashboard/sidebar'
-import { createClient } from '@/lib/supabase/server'
+import {
+    BellIcon,
+    HomeIcon,
+    LayoutGridIcon,
+    Package2Icon,
+    PackageIcon,
+    SearchIcon,
+    ShoppingCartIcon,
+} from '@/lib/components/icons/icons'
 
-const dashboard = () => {
-    const supabase = createClient()
-    // const
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from 'next/headers'
+export default async function Component() {
+    // const supabase = createClientComponentClient()
+    const cookieStore = cookies()
+    const supabase = createServerComponentClient({
+        cookies: () => cookieStore,
+    })
+    const { data } = await supabase.from('todos').select()
+    console.log(data)
     return (
-        <div className="grid min-h-screen w-full overflow-hidden lg:grid-cols-[280px_1fr]">
+        <div className="flex min-h-screen w-full">
             <div className="hidden border-r bg-gray-100/40 lg:block dark:bg-gray-800/40">
-                {/* show sidebar */}
-                <Sidebar />
-            </div>
-            <div className="flex flex-col">
-                <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b bg-gray-100/40 px-6 dark:bg-gray-800/40">
-                    <Link className="lg:hidden" href="#">
-                        <Package2Icon className="h-6 w-6" />
-                        <span className="sr-only">Home</span>
-                    </Link>
-                    <div className="w-full">
-                        <h1 className="font-semibold text-lg">Recent Orders</h1>
+                <div className="flex h-full flex-col gap-2">
+                    <div className="flex h-14 items-center border-b px-6">
+                        <Link
+                            className="flex items-center gap-2 font-semibold"
+                            href="#"
+                        >
+                            <Package2Icon className="h-6 w-6" />
+                            <span className="">Acme Inc</span>
+                        </Link>
                     </div>
+                    <nav className="grid items-start px-4 text-sm font-medium">
+                        <Link
+                            className="flex items-center gap-3 rounded-lg bg-gray-100 px-3 py-2 text-gray-900  transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50"
+                            href="#"
+                        >
+                            <HomeIcon className="h-4 w-4" />
+                            Home
+                        </Link>
+                        <Link
+                            className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
+                            href="#"
+                        >
+                            <PackageIcon className="h-4 w-4" />
+                            Products
+                        </Link>
+                        <Link
+                            className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
+                            href="#"
+                        >
+                            <LayoutGridIcon className="h-4 w-4" />
+                            Categories
+                        </Link>
+                        <Link
+                            className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
+                            href="#"
+                        >
+                            <ShoppingCartIcon className="h-4 w-4" />
+                            Orders
+                        </Link>
+                    </nav>
+                </div>
+            </div>
+            <div className="flex flex-col w-full">
+                <header className="flex h-14 items-center gap-4 border-b bg-gray-100/40 px-6 dark:bg-gray-800/40">
+                    <Button className="lg:hidden" variant="ghost">
+                        <Package2Icon className="w-6 h-6" />
+                        <span className="sr-only">Home</span>
+                    </Button>
+                    <div className="w-full flex-1">
+                        <form>
+                            <div className="relative">
+                                <SearchIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500 dark:text-gray-400" />
+                                <Input
+                                    className="w-full bg-white shadow-none appearance-none pl-8 md:w-2/3 lg:w-1/3 dark:bg-gray-950"
+                                    placeholder="Search products..."
+                                    type="search"
+                                />
+                            </div>
+                        </form>
+                    </div>
+
+                    <Button
+                        className="ml-auto h-8 w-8"
+                        size="icon"
+                        variant="outline"
+                    >
+                        <BellIcon className="h-4 w-4" />
+                        <span className="sr-only">Toggle notifications</span>
+                    </Button>
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button
@@ -49,7 +127,7 @@ const dashboard = () => {
                                     alt="Avatar"
                                     className="rounded-full"
                                     height="32"
-                                    src="/placeholder.svg"
+                                    src="https://placehold.co/100"
                                     style={{
                                         aspectRatio: '32/32',
                                         objectFit: 'cover',
@@ -72,360 +150,123 @@ const dashboard = () => {
                     </DropdownMenu>
                 </header>
                 <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
-                    <div className="border shadow-sm rounded-lg p-2">
+                    <div className="flex items-center">
+                        <h1 className="font-semibold text-lg md:text-2xl">
+                            Products
+                        </h1>
+                        <Button className="ml-auto" size="sm">
+                            Add product
+                        </Button>
+                    </div>
+                    <div className="border shadow-sm rounded-lg">
                         <Table>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead className="w-[100px]">
-                                        Order
+                                    <TableHead className="w-[80px]">
+                                        Image
                                     </TableHead>
-                                    <TableHead className="min-w-[150px]">
-                                        Customer
+                                    <TableHead className="max-w-[150px]">
+                                        Name
                                     </TableHead>
-                                    <TableHead className="hidden md:table-cell">
-                                        Channel
-                                    </TableHead>
-                                    <TableHead className="hidden md:table-cell">
-                                        Date
-                                    </TableHead>
-                                    <TableHead className="text-right">
-                                        Total
-                                    </TableHead>
-                                    <TableHead className="hidden sm:table-cell">
-                                        Status
-                                    </TableHead>
-                                    <TableHead className="text-right">
-                                        Actions
-                                    </TableHead>
+                                    <TableHead>Price</TableHead>
+                                    <TableHead>Inventory</TableHead>
+                                    <TableHead>Status</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
                                 <TableRow>
+                                    <TableCell>
+                                        <img
+                                            alt="Product image"
+                                            className="aspect-square rounded-md object-cover"
+                                            height="64"
+                                            src="https://placehold.co/100"
+                                            width="64"
+                                        />
+                                    </TableCell>
                                     <TableCell className="font-medium">
-                                        #3210
+                                        Glimmer Lamps
                                     </TableCell>
-                                    <TableCell>Olivia Martin</TableCell>
+                                    <TableCell>$49.99</TableCell>
+                                    <TableCell>500 in stock</TableCell>
                                     <TableCell className="hidden md:table-cell">
-                                        Online Store
-                                    </TableCell>
-                                    <TableCell className="hidden md:table-cell">
-                                        February 20, 2022
-                                    </TableCell>
-                                    <TableCell className="text-right">
-                                        $42.25
-                                    </TableCell>
-                                    <TableCell className="hidden sm:table-cell">
-                                        Shipped
-                                    </TableCell>
-                                    <TableCell className="text-right">
-                                        <DropdownMenu>
-                                            <DropdownMenuTrigger asChild>
-                                                <Button
-                                                    size="icon"
-                                                    variant="ghost"
-                                                >
-                                                    <MoreHorizontalIcon className="w-4 h-4" />
-                                                    <span className="sr-only">
-                                                        Actions
-                                                    </span>
-                                                </Button>
-                                            </DropdownMenuTrigger>
-                                            <DropdownMenuContent align="end">
-                                                <DropdownMenuItem>
-                                                    View order
-                                                </DropdownMenuItem>
-                                                <DropdownMenuItem>
-                                                    Customer details
-                                                </DropdownMenuItem>
-                                            </DropdownMenuContent>
-                                        </DropdownMenu>
+                                        In Production
                                     </TableCell>
                                 </TableRow>
                                 <TableRow>
+                                    <TableCell>
+                                        <img
+                                            alt="Product image"
+                                            className="aspect-square rounded-md object-cover"
+                                            height="64"
+                                            src="https://placehold.co/100"
+                                            width="64"
+                                        />
+                                    </TableCell>
                                     <TableCell className="font-medium">
-                                        #3209
+                                        Aqua Filters
                                     </TableCell>
-                                    <TableCell>Ava Johnson</TableCell>
+                                    <TableCell>$29.99</TableCell>
+                                    <TableCell>750 in stock</TableCell>
                                     <TableCell className="hidden md:table-cell">
-                                        Shop
-                                    </TableCell>
-                                    <TableCell className="hidden md:table-cell">
-                                        January 5, 2022
-                                    </TableCell>
-                                    <TableCell className="text-right">
-                                        $74.99
-                                    </TableCell>
-                                    <TableCell className="hidden sm:table-cell">
-                                        Paid
-                                    </TableCell>
-                                    <TableCell className="text-right">
-                                        <DropdownMenu>
-                                            <DropdownMenuTrigger asChild>
-                                                <Button
-                                                    size="icon"
-                                                    variant="ghost"
-                                                >
-                                                    <MoreHorizontalIcon className="w-4 h-4" />
-                                                    <span className="sr-only">
-                                                        Actions
-                                                    </span>
-                                                </Button>
-                                            </DropdownMenuTrigger>
-                                            <DropdownMenuContent align="end">
-                                                <DropdownMenuItem>
-                                                    View order
-                                                </DropdownMenuItem>
-                                                <DropdownMenuItem>
-                                                    Customer details
-                                                </DropdownMenuItem>
-                                            </DropdownMenuContent>
-                                        </DropdownMenu>
+                                        Available for Order
                                     </TableCell>
                                 </TableRow>
                                 <TableRow>
+                                    <TableCell>
+                                        <img
+                                            alt="Product image"
+                                            className="aspect-square rounded-md object-cover"
+                                            height="64"
+                                            src="https://placehold.co/100"
+                                            width="64"
+                                        />
+                                    </TableCell>
                                     <TableCell className="font-medium">
-                                        #3204
+                                        Eco Planters
                                     </TableCell>
-                                    <TableCell>Michael Johnson</TableCell>
+                                    <TableCell>$19.99</TableCell>
+                                    <TableCell>300 in stock</TableCell>
                                     <TableCell className="hidden md:table-cell">
-                                        Shop
-                                    </TableCell>
-                                    <TableCell className="hidden md:table-cell">
-                                        August 3, 2021
-                                    </TableCell>
-                                    <TableCell className="text-right">
-                                        $64.75
-                                    </TableCell>
-                                    <TableCell className="hidden sm:table-cell">
-                                        Unfulfilled
-                                    </TableCell>
-                                    <TableCell className="text-right">
-                                        <DropdownMenu>
-                                            <DropdownMenuTrigger asChild>
-                                                <Button
-                                                    size="icon"
-                                                    variant="ghost"
-                                                >
-                                                    <MoreHorizontalIcon className="w-4 h-4" />
-                                                    <span className="sr-only">
-                                                        Actions
-                                                    </span>
-                                                </Button>
-                                            </DropdownMenuTrigger>
-                                            <DropdownMenuContent align="end">
-                                                <DropdownMenuItem>
-                                                    View order
-                                                </DropdownMenuItem>
-                                                <DropdownMenuItem>
-                                                    Customer details
-                                                </DropdownMenuItem>
-                                            </DropdownMenuContent>
-                                        </DropdownMenu>
+                                        Backordered
                                     </TableCell>
                                 </TableRow>
                                 <TableRow>
+                                    <TableCell>
+                                        <img
+                                            alt="Product image"
+                                            className="aspect-square rounded-md object-cover"
+                                            height="64"
+                                            src="https://placehold.co/100"
+                                            width="64"
+                                        />
+                                    </TableCell>
                                     <TableCell className="font-medium">
-                                        #3203
+                                        Zest Juicers
                                     </TableCell>
-                                    <TableCell>Lisa Anderson</TableCell>
+                                    <TableCell>$59.99</TableCell>
+                                    <TableCell>1000 in stock</TableCell>
                                     <TableCell className="hidden md:table-cell">
-                                        Online Store
-                                    </TableCell>
-                                    <TableCell className="hidden md:table-cell">
-                                        July 15, 2021
-                                    </TableCell>
-                                    <TableCell className="text-right">
-                                        $34.50
-                                    </TableCell>
-                                    <TableCell className="hidden sm:table-cell">
-                                        Shipped
-                                    </TableCell>
-                                    <TableCell className="text-right">
-                                        <DropdownMenu>
-                                            <DropdownMenuTrigger asChild>
-                                                <Button
-                                                    size="icon"
-                                                    variant="ghost"
-                                                >
-                                                    <MoreHorizontalIcon className="w-4 h-4" />
-                                                    <span className="sr-only">
-                                                        Actions
-                                                    </span>
-                                                </Button>
-                                            </DropdownMenuTrigger>
-                                            <DropdownMenuContent align="end">
-                                                <DropdownMenuItem>
-                                                    View order
-                                                </DropdownMenuItem>
-                                                <DropdownMenuItem>
-                                                    Customer details
-                                                </DropdownMenuItem>
-                                            </DropdownMenuContent>
-                                        </DropdownMenu>
+                                        Newly Launched
                                     </TableCell>
                                 </TableRow>
                                 <TableRow>
+                                    <TableCell>
+                                        <img
+                                            alt="Product image"
+                                            className="aspect-square rounded-md object-cover"
+                                            height="64"
+                                            src="https://placehold.co/100"
+                                            width="64"
+                                        />
+                                    </TableCell>
                                     <TableCell className="font-medium">
-                                        #3202
+                                        Flexi Wearables
                                     </TableCell>
-                                    <TableCell>Samantha Green</TableCell>
+                                    <TableCell>$79.99</TableCell>
+                                    <TableCell>200 in stock</TableCell>
                                     <TableCell className="hidden md:table-cell">
-                                        Shop
-                                    </TableCell>
-                                    <TableCell className="hidden md:table-cell">
-                                        June 5, 2021
-                                    </TableCell>
-                                    <TableCell className="text-right">
-                                        $89.99
-                                    </TableCell>
-                                    <TableCell className="hidden sm:table-cell">
-                                        Paid
-                                    </TableCell>
-                                    <TableCell className="text-right">
-                                        <DropdownMenu>
-                                            <DropdownMenuTrigger asChild>
-                                                <Button
-                                                    size="icon"
-                                                    variant="ghost"
-                                                >
-                                                    <MoreHorizontalIcon className="w-4 h-4" />
-                                                    <span className="sr-only">
-                                                        Actions
-                                                    </span>
-                                                </Button>
-                                            </DropdownMenuTrigger>
-                                            <DropdownMenuContent align="end">
-                                                <DropdownMenuItem>
-                                                    View order
-                                                </DropdownMenuItem>
-                                                <DropdownMenuItem>
-                                                    Customer details
-                                                </DropdownMenuItem>
-                                            </DropdownMenuContent>
-                                        </DropdownMenu>
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell className="font-medium">
-                                        #3201
-                                    </TableCell>
-                                    <TableCell>Adam Barlow</TableCell>
-                                    <TableCell className="hidden md:table-cell">
-                                        Online Store
-                                    </TableCell>
-                                    <TableCell className="hidden md:table-cell">
-                                        May 20, 2021
-                                    </TableCell>
-                                    <TableCell className="text-right">
-                                        $24.99
-                                    </TableCell>
-                                    <TableCell className="hidden sm:table-cell">
-                                        Unfulfilled
-                                    </TableCell>
-                                    <TableCell className="text-right">
-                                        <DropdownMenu>
-                                            <DropdownMenuTrigger asChild>
-                                                <Button
-                                                    size="icon"
-                                                    variant="ghost"
-                                                >
-                                                    <MoreHorizontalIcon className="w-4 h-4" />
-                                                    <span className="sr-only">
-                                                        Actions
-                                                    </span>
-                                                </Button>
-                                            </DropdownMenuTrigger>
-                                            <DropdownMenuContent align="end">
-                                                <DropdownMenuItem>
-                                                    View order
-                                                </DropdownMenuItem>
-                                                <DropdownMenuItem>
-                                                    Customer details
-                                                </DropdownMenuItem>
-                                            </DropdownMenuContent>
-                                        </DropdownMenu>
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell className="font-medium">
-                                        #3207
-                                    </TableCell>
-                                    <TableCell>Sophia Anderson</TableCell>
-                                    <TableCell className="hidden md:table-cell">
-                                        Shop
-                                    </TableCell>
-                                    <TableCell className="hidden md:table-cell">
-                                        November 2, 2021
-                                    </TableCell>
-                                    <TableCell className="text-right">
-                                        $99.99
-                                    </TableCell>
-                                    <TableCell className="hidden sm:table-cell">
-                                        Paid
-                                    </TableCell>
-                                    <TableCell className="text-right">
-                                        <DropdownMenu>
-                                            <DropdownMenuTrigger asChild>
-                                                <Button
-                                                    size="icon"
-                                                    variant="ghost"
-                                                >
-                                                    <MoreHorizontalIcon className="w-4 h-4" />
-                                                    <span className="sr-only">
-                                                        Actions
-                                                    </span>
-                                                </Button>
-                                            </DropdownMenuTrigger>
-                                            <DropdownMenuContent align="end">
-                                                <DropdownMenuItem>
-                                                    View order
-                                                </DropdownMenuItem>
-                                                <DropdownMenuItem>
-                                                    Customer details
-                                                </DropdownMenuItem>
-                                            </DropdownMenuContent>
-                                        </DropdownMenu>
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell className="font-medium">
-                                        #3206
-                                    </TableCell>
-                                    <TableCell>Daniel Smith</TableCell>
-                                    <TableCell className="hidden md:table-cell">
-                                        Online Store
-                                    </TableCell>
-                                    <TableCell className="hidden md:table-cell">
-                                        October 7, 2021
-                                    </TableCell>
-                                    <TableCell className="text-right">
-                                        $67.50
-                                    </TableCell>
-                                    <TableCell className="hidden sm:table-cell">
-                                        Shipped
-                                    </TableCell>
-                                    <TableCell className="text-right">
-                                        <DropdownMenu>
-                                            <DropdownMenuTrigger asChild>
-                                                <Button
-                                                    size="icon"
-                                                    variant="ghost"
-                                                >
-                                                    <MoreHorizontalIcon className="w-4 h-4" />
-                                                    <span className="sr-only">
-                                                        Actions
-                                                    </span>
-                                                </Button>
-                                            </DropdownMenuTrigger>
-                                            <DropdownMenuContent align="end">
-                                                <DropdownMenuItem>
-                                                    View order
-                                                </DropdownMenuItem>
-                                                <DropdownMenuItem>
-                                                    Customer details
-                                                </DropdownMenuItem>
-                                            </DropdownMenuContent>
-                                        </DropdownMenu>
+                                        Selling Fast
                                     </TableCell>
                                 </TableRow>
                             </TableBody>
@@ -436,5 +277,3 @@ const dashboard = () => {
         </div>
     )
 }
-
-export default dashboard
